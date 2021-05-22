@@ -32,7 +32,7 @@ public:
 
   void*          operator()(int x, int y) noexcept { return (void*)(m_buffer + y * m_pitch + x * m_size); }
   int            width() const noexcept { return m_width; }
-  int            height() const noexcept { return m_width; }
+  int            height() const noexcept { return m_height; }
   pixel_format_t dtype() const noexcept { return m_dtype; }
 
 protected:
