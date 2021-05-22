@@ -27,4 +27,5 @@ TEST(CPPA, test_dummy)
   ASSERT_EQ(f(5,5), 55);
 
   dilate1d(f, f, 5, [](auto a, auto b) { return std::min(a, b); }, 0);
+  ASSERT_EQ(f(5,5), 55);
 }
