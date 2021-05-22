@@ -56,6 +56,3 @@ public:
   T& operator()(int x, int y) noexcept { return ((T*)m_buffer)[y * m_width + x]; }
   T  operator()(int x, int y) const noexcept { return ((T*)m_buffer)[y * m_width + x]; }
 };
-
-
-

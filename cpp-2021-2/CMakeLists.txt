@@ -9,7 +9,7 @@ add_compile_options(-W -Wall -Werror -std=c++2a)
 
 
 ## MAIN library
-add_library(cppa src/image.cpp src/dilate.cpp)
+add_library(cppa src/image.cpp)
 
 target_include_directories(cppa PUBLIC ${CMAKE_SOURCE_DIR}/include)
 
