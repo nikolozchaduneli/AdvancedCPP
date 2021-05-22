@@ -26,6 +26,16 @@ TEST(CPPA, test_dummy)
   auto f = generate_iota(10,10);
   ASSERT_EQ(f(5,5), 55);
 
-  dilate1d(f, f, 5, [](auto a, auto b) { return std::min(a, b); }, 0);
+  dilate1d(f, f, 5, [](auto a, auto b) { return std::max(a, b); }, 0);
+
+  for (int y = 0; y < 10; ++y)
+  {
+    for (int x = 0; x < 10; ++x)
+    {
+      printf("%d, ", f(x, y));
+    }
+    printf("\n");
+  }
+
   ASSERT_EQ(f(5,5), 55);
 }
