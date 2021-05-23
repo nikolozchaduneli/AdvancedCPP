@@ -4,22 +4,29 @@
 
 # Instruction de build pour le projet
 
-Pour compiler le projet, vous aurez besoin de Conan[^conan]. Pour l'installer, il suffit d'utiliser *pip*, le package manager de Python :
+Pour compiler le projet, vous aurez besoin de [conan]. Pour l'installer, il suffit d'utiliser *pip*, le package manager de Python :
 
 ```
 $ pip install [--user] conan
+$ conan install .. -s compiler.cppstd=20 -s compiler.libcxx=libstdc++11 --build missing
+```
+
+# Instruction pour compiler le projet
+
+Pour compiler le projet il vous faudra créer le dossier build à l'aide de cette commande :
+
+```
+$ mkdir build
+$ cd build
 ```
 
 Ensuite, pour compiler le projet, il faut executer les commandes suivantes :
 
 ```
-$ conan install .. -s compiler.cppstd=20 -s compiler.libcxx=libstdc++11 --build missing
-$ cmake ..
+$ cmake .. // seulement lors de la première éxécution.
 $ make
 ```
 
-Vous pouvez (et devez) utiliser ``make test`` pour lancer vos tests et ``make bench`` pour lancer vos benchs.
+Pour effectuer les tests il suffit de faire ``make test`` et ``make bench`` pour lancer vos benchs.
 
-En cas de soucis technique, contacter <besteban@lrde.epita.fr>.
-
-[^conan]: <https://conan.io/>
+[conan]: <https://conan.io/>
