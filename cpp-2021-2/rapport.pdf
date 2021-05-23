@@ -1,8 +1,8 @@
-					Sujet 2:
-	Une approche bibliothèque au JIT en C++ appliquée au traitement d’images :
+Sujet 2:
+Une approche bibliothèque au JIT en C++ appliquée au traitement d’images :
 
 
-Personnes du groupe :
+Membres du groupe :
 
 Youenn Loie
 Maxime Brouillard
@@ -11,4 +11,42 @@ William Te
 Antoine Roubaud
 
 
+Les choix fait durant le projet :
 
+- Ecrire le programme de dilate dans le fichier dilate.hpp.
+
+- Changement du flag dans CMakelist.txt std=c++20 en std=c++2a suggéré par le compilateur car celui que vous nous aviez donné ne marchais pas.
+
+```
+add_compile_options(-W -Wall -Werror -std=c++2a)
+```
+
+- Changement du prototype de fonction pour `dilate1d` en passant in et out par référence car, comme vous le faisiez, en copie, cela ne marche pas.
+
+```
+void dilate1d(image2d<T> &in, image2d<T> &out, int k, BinaryOperation sup, T zero)
+```
+
+- Créartion d'un lambda fonction lors de l'appel à dilate pour remplacer std::min car cela ne marchais pas.
+
+```
+dilate1d(in, in, 5, [](auto a, auto b) { return std::min(a, b); }, 0);
+```
+
+- Ne pas considérer la variable "zero" car nous ne comprenions pas comment s'en servir.
+
+- Un problème majeur que nous avons rencontré était la compréhension du sujet, en effet une explication de votre part aurait été apréciable.
+
+- Il y avait une erreur d'implémentation dans le switch que vous nous donniez pour la 2ème version, en effet, il manquais une variable à l'appel de la fonction dilate1d, (ainsi que le problème du std::min). De plus nous n'avons pas réussi à faire compiler le code lorque nous laissions ces typage aux appel de dilate1d (comme UINT8_MAX), nous les avons donc caster dans le type attendu par le compilateur pour pouvoir compiler le programme.
+
+```
+case UINT8: dilate1d( (image2d<uint8_t>&)in, (image2d<uint8_t>&)out, k, [](auto a, auto b) { return std::min(a, b); }, (unsigned char)UINT8_MAX);
+```
+
+- Nous avons eut beaucoup de mal à comprendre ASMJit, c'est pourquoi nous n'avons pu faire la partie 3.
+
+Présentation des résultats :
+- On en a pas ? (Je ne sais pas quoi mettre ici).
+ 
+Conclusion :
+- Le sujet était compliqué et difficile à prendre en main sans explications, de plus les erreurs de typos dans le code que vous nous donniez nous ont ralentis. Le sujet était trop éloigné des notions vues en cours à notre goût. Il aurait fallut être un peu plus guidé ou avoir un sujet plus proche du cours.
