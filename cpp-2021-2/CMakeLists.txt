@@ -10,6 +10,7 @@ add_compile_options(-W -Wall -Werror -std=c++2a)
 
 ## MAIN library
 add_library(cppa src/image.cpp)
+target_link_libraries(cppa libasmjit.so)
 
 target_include_directories(cppa PUBLIC ${CMAKE_SOURCE_DIR}/include)
 

@@ -25,17 +25,48 @@ TEST(CPPA, test_dummy)
 {
   auto f = generate_iota(10,10);
   ASSERT_EQ(f(5,5), 55);
+}
 
-  dilate1d(f, f, 5, [](auto a, auto b) { return std::max(a, b); }, 0);
+TEST(CPPA, dilate)
+{
+  auto in = generate_iota(10,10);
+  auto out = generate_iota(10,10);
 
-  for (int y = 0; y < 10; ++y)
-  {
-    for (int x = 0; x < 10; ++x)
-    {
-      printf("%d, ", f(x, y));
-    }
-    printf("\n");
-  }
+  dilate1d(in, out, 5, [](auto a, auto b) { return std::max(a, b); }, 0);
 
-  ASSERT_EQ(f(5,5), 55);
+  ASSERT_EQ(in(5,5), 55);
+  ASSERT_NE(out(5,5), 55);
+}
+
+TEST(CPPA, erosion)
+{
+  auto in = generate_iota(10,10);
+  auto out = generate_iota(10,10);
+
+  dilate1d(in, out, 5, [](auto a, auto b) { return std::min(a, b); }, 0);
+
+  ASSERT_EQ(in(5,5), 55);
+  ASSERT_NE(out(5,5), 55);
+}
+
+TEST(CPPA, in_place_erosion)
+{
+  auto in = generate_iota(10,10);
+
+  ASSERT_EQ(in(5,5), 55);
+
+  dilate1d(in, in, 5, [](auto a, auto b) { return std::min(a, b); }, 0);
+
+  ASSERT_NE(in(5,5), 55);
+}
+
+TEST(CPPA, dilate_V2)
+{
+  auto in = generate_iota(10,10);
+  auto out = generate_iota(10,10);
+
+  dilate1d(in, out, 5, false);
+
+  ASSERT_EQ(in(5,5), 55);
+  ASSERT_NE(out(5,5), 55);
 }
