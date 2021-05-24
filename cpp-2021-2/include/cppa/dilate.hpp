@@ -40,13 +40,16 @@ void dilate1d(image2d<T> &in, image2d<T> &out, int k, BinaryOperation sup, T zer
                         sup);
         }
 
+        rem = n;
+        chunk_start = 0;
+
         for (; rem > 0; chunk_start += alpha, rem -= alpha)
         {
             int chunk_size = std::min(alpha, rem);
 
-            std::partial_sum(std::make_reverse_iterator(&in(chunk_start,y)),
-                             std::make_reverse_iterator(&in(chunk_start + chunk_size, y)),
-                             std::make_reverse_iterator(&h[chunk_start]),
+            std::partial_sum(std::make_reverse_iterator(&in(chunk_start + chunk_size,y)),
+                             std::make_reverse_iterator(&in(chunk_start, y)),
+                             std::make_reverse_iterator(&h[chunk_start + chunk_size]),
                              sup);
         }
 

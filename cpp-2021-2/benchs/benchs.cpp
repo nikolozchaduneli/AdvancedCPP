@@ -20,7 +20,7 @@ static void BM_Dilate(benchmark::State& state)
   image2d<int> out(n, n);
 
   for (auto _ : state)
-    dilate1d(out, out, 5, [](auto a, auto b) { return std::max(a, b); }, 0);
+    dilate1d(out, out, 5, false);
 
 
   state.SetBytesProcessed(int64_t(state.iterations()) * int64_t(n * n));
@@ -37,7 +37,7 @@ static void BM_Erode(benchmark::State& state)
   image2d<int> out(n, n);
 
   for (auto _ : state)
-    dilate1d(out, out, 5, [](auto a, auto b) { return std::min(a, b); }, 0);
+    dilate1d(out, out, 5, true);
 
 
   state.SetBytesProcessed(int64_t(state.iterations()) * int64_t(n * n));
