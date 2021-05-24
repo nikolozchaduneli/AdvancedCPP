@@ -8,7 +8,6 @@ Pour compiler le projet, vous aurez besoin de [conan]. Pour l'installer, il suff
 
 ```
 $ pip install [--user] conan
-$ conan install .. -s compiler.cppstd=20 -s compiler.libcxx=libstdc++11 --build missing
 ```
 
 # Instruction pour compiler le projet
@@ -18,6 +17,7 @@ Pour compiler le projet il vous faudra créer le dossier build à l'aide de cett
 ```
 $ mkdir build
 $ cd build
+$ conan install .. -s compiler.cppstd=20 -s compiler.libcxx=libstdc++11 --build missing
 ```
 
 Ensuite, pour compiler le projet, il faut executer les commandes suivantes :
