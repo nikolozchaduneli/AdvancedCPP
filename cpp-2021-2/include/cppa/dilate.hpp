@@ -98,6 +98,7 @@ void dilate1d(image2d_any in, image2d_any out, int k, bool decreasing)
     }
 }
 
+/*
 // Version 3 dynamique avec code généré avec ASM Jit
 void dilate1dV3(image2d_any in, image2d_any out, int k, bool decreasing)
 {
@@ -123,3 +124,4 @@ void dilate1dV3(image2d_any in, image2d_any out, int k, bool decreasing)
 
     rt.release(fn);
 }
+*/
